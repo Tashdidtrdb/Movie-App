@@ -143,7 +143,7 @@ extension TableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, U
 extension TableViewCell: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         guard let lastIndexPath = indexPaths.last else { return }
-        if lastIndexPath.row >= movies.count - 5 {
+        if pagesRemaining && lastIndexPath.row >= movies.count - 5 {
             guard let genreId = genreId, let currentPage = currentPage else { return }
             fetchMovies(genreId: genreId, page: currentPage + 1)
         }
