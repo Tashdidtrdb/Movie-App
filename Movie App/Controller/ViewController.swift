@@ -11,11 +11,12 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var networkManager = NetworkManager()
+    var movieServer = MovieServer()
     var genres: [Genre] = []
     
     var cachedCollectionViewPosition = Dictionary<IndexPath, CGPoint>()
     var cachedCollectionViewPage = Dictionary<IndexPath, Int>()
+    var cachedDataInCollectionView = Dictionary<IndexPath, [Movie]>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +25,18 @@ class ViewController: UIViewController {
         tableView.register(TableViewCell.nib(), forCellReuseIdentifier: TableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-//        networkManager.delegate = self
         
         fetchGenres()
     }
     
     func fetchGenres() {
-        networkManager.fetchGenres() { [weak self] response in
+        movieServer.fetchGenres() { [weak self] response in
+            guard let self = self else { return }
             switch response {
             case .success(let genreResponse):
-                self?.genres = genreResponse.genres
+                self.genres = genreResponse.genres
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+                    self.tableView.reloadData()
                 }
             case .failure(let error):
                 print(error)
@@ -57,7 +58,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewCell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.identifier, for: indexPath) as! TableViewCell
-        cell.configure(with: genres[indexPath.section], page: cachedCollectionViewPage[indexPath] ?? 1, offset: cachedCollectionViewPosition[indexPath] ?? .zero)
+        cell.configure(with: genres[indexPath.section], page: cachedCollectionViewPage[indexPath] ?? 1, previousMovies: cachedDataInCollectionView[indexPath] ?? [], offset: cachedCollectionViewPosition[indexPath] ?? .zero)
         
         return cell
     }
@@ -66,6 +67,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = cell as? TableViewCell {
             cachedCollectionViewPosition[indexPath] = cell.collectionView.contentOffset
             cachedCollectionViewPage[indexPath] = cell.currentPage
+            cachedDataInCollectionView[indexPath] = cell.movies
         }
     }
     
@@ -74,20 +76,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
-
-// MARK: - NetworkManager delegate
-
-//extension ViewController: NetworkManagerDelegate {
-//    func networkManger<T>(_ networkManager: NetworkManager, didFetchWithSuccess data: T) {
-//        let genreResponse: GenreResponse = data as! GenreResponse
-//        genres = genreResponse.genres
-//
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
-//    }
-//
-//    func networkManager(_ networkManager: NetworkManager, didFailWithError error: Error) {
-//        print(error)
-//    }
-//}

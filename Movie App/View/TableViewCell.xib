@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -23,13 +23,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genre name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89O-yc-sZl">
-                        <rect key="frame" x="18" y="0.0" width="406" height="46.5"/>
+                        <rect key="frame" x="18" y="0.0" width="406" height="37.5"/>
                         <fontDescription key="fontDescription" name="Dongle-Bold" family="Dongle" pointSize="32"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="bJn-lC-qUD">
-                        <rect key="frame" x="10" y="46.5" width="404" height="156.5"/>
+                        <rect key="frame" x="10" y="37.5" width="404" height="165.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Hgp-uU-PIp">
                             <size key="itemSize" width="128" height="128"/>
@@ -39,7 +39,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmC-4n-FJC">
-                        <rect key="frame" x="8" y="114.5" width="10" height="10"/>
+                        <rect key="frame" x="8" y="105.5" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="Bgn-PE-g69"/>
                             <constraint firstAttribute="height" constant="10" id="ir5-9M-Yrj"/>
@@ -55,7 +55,7 @@
                         </connections>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJC-7H-l1s">
-                        <rect key="frame" x="406" y="114.5" width="10" height="10"/>
+                        <rect key="frame" x="406" y="105.5" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="SZu-cS-uUW"/>
                             <constraint firstAttribute="width" constant="10" id="kUg-6s-pLT"/>
@@ -71,7 +71,7 @@
                         </connections>
                     </button>
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="roV-uP-M2A">
-                        <rect key="frame" x="202" y="116.5" width="20" height="20"/>
+                        <rect key="frame" x="202" y="107.5" width="20" height="20"/>
                     </activityIndicatorView>
                 </subviews>
                 <constraints>
@@ -92,13 +92,13 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="activityIndicationView" destination="roV-uP-M2A" id="95F-KR-vka"/>
                 <outlet property="collectionView" destination="bJn-lC-qUD" id="ypV-c8-nBE"/>
-                <outlet property="collectionViewLeftConstraint" destination="xRo-AM-en5" id="dXt-fB-Gep"/>
-                <outlet property="collectionViewRightConstraint" destination="Qpd-CP-mVo" id="C75-zf-Xfx"/>
-                <outlet property="label" destination="89O-yc-sZl" id="mUW-rC-Vqf"/>
+                <outlet property="collectionViewLeadingConstraint" destination="xRo-AM-en5" id="dXt-fB-Gep"/>
+                <outlet property="collectionViewTrailingConstraint" destination="Qpd-CP-mVo" id="C75-zf-Xfx"/>
+                <outlet property="genreLabel" destination="89O-yc-sZl" id="mUW-rC-Vqf"/>
                 <outlet property="nextButton" destination="iJC-7H-l1s" id="Rhy-Xj-LzT"/>
                 <outlet property="previousButton" destination="nmC-4n-FJC" id="hHh-wX-O3Q"/>
-                <outlet property="spinner" destination="roV-uP-M2A" id="95F-KR-vka"/>
             </connections>
             <point key="canvasLocation" x="-137.68115942028987" y="169.08482142857142"/>
         </tableViewCell>

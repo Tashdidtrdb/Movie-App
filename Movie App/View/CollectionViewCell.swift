@@ -10,23 +10,19 @@ import SDWebImage
 
 class CollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "CollectionViewCell"
-    
-    static func nib() -> UINib {
-        return UINib(nibName: identifier, bundle: nil)
-    }
-    
     @IBOutlet weak var imageView: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-    }
     
     func configure(with movie: Movie) {
         imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
         imageView.sd_setImage(with: URL(string: movie.posterURL), placeholderImage: UIImage(named: "photo"))
+    }
+}
+
+extension CollectionViewCell: ScrollViewDelegate {
+    static let identifier = "CollectionViewCell"
+    
+    static func nib() -> UINib {
+        return UINib(nibName: identifier, bundle: nil)
     }
 }
 
